@@ -13,7 +13,7 @@ export default async function handle(req, res) {
         },
       })
 
-      res.status(201).json(post).setHeader("Location", "/")
+      res.status(201).json(post)
       break
     default:
       res.status(405).end(`Method ${method} Not Allowed`)
