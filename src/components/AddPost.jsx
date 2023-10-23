@@ -1,12 +1,12 @@
 import { useState } from "react"
 
-const AddPost = () => {
+const AddPost = ({ posts, setPosts }) => {
   const [content, setContent] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await fetch("/api/posts", {
+      const response = await fetch("/api/posts", {
         method: "POST",
         body: JSON.stringify({ content }),
         headers: {
@@ -14,6 +14,8 @@ const AddPost = () => {
         },
       })
 
+      const newPost = await response.json()
+      setPosts([newPost, ...posts])
       setContent("")
     } catch (error) {
       console.error(error)
